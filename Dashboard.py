@@ -37,6 +37,11 @@ if_corr = st.sidebar.selectbox('Yes or no', ('Yes', 'No'))
 threshold = st.sidebar.number_input('If so, what is the threshold: ', 0.5)
 st.sidebar.write(f'There will be a connection between two stocks if their correlation is bigger than {threshold}')
 
+st.sidebar.markdown('''
+---
+Created by Coco Huang and Lulu Wang.
+''')
+
 # Row A
 st.markdown('### Data')
 col1, col2, col3 = st.columns(3)
@@ -58,7 +63,7 @@ if if_corr == 'Yes':
     binary_adj = Util.cov_adj(X,threshold)
     n_edges = binary_adj.sum()
     # Row D
-    st.markdown(f'### Correlation method discovered latent stock network: {n_edges} connections')
+    st.markdown(f'### Correlation method discovered latent stock network: {n_edges} connections.')
     G = Util.create_G(binary_adj)
     fig = Util.plot_network(G,embedding,names,'')
     # Row E

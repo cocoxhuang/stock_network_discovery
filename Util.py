@@ -9,14 +9,17 @@ import requests
 import yfinance as yf
 from sklearn.decomposition  import PCA
 
-def get_data(top,start,end):
+def get_data(top,start,end,symbols = None):
 
     # download the symbols of stocks
     df = pd.read_html(requests.get('https://www.slickcharts.com/sp500',
-                        headers={'User-agent': 'Mozilla/5.0'}).text)[0]
-    symbols = list(df['Symbol'].values[:top])
-    names = list(df['Company'].values[:top])
-    print(f"The top {top} symbols in S&P 500 by weights order is: {symbols}")
+                            headers={'User-agent': 'Mozilla/5.0'}).text)[0]
+    if symbols == None: # if user does not specify stocks 
+        symbols = list(df['Symbol'].values[:top])
+        names = list(df['Company'].values[:top])
+        print(f"The top {top} symbols in S&P 500 by weights order is: {symbols}")
+    else:   # if user specify stocks
+        names = list(df[df['Symbol'].isin(symbols)]['Company'].values)
 
     # downloading data
     data = yf.download(symbols, start=start, end=end)

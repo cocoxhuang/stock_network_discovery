@@ -25,7 +25,6 @@ start_dt = datetime.strptime(start, '%m-%d-%Y').date()
 end_dt = datetime.strptime(end, '%m-%d-%Y').date()
 n_days = int( (end_dt-start_dt).days * 0.69)
 
-
 # select stocks by number of top stocks
 st.sidebar.subheader('Pick stocks:')
 st.sidebar.write('Would you like to pick your stocks or select a number of top weighted stocks from S&P 500?')
@@ -45,6 +44,11 @@ else:
 st.sidebar.write(f'The number of stocks is {n_stocks}. At most {n_days} for computation accurary.')
 
 # Correlation method
+st.sidebar.subheader('Time series:')
+st.sidebar.write('Would you like to plot the time series of daily variations (close - open) of these stocks? ')
+if_ts = st.sidebar.selectbox('Yes or no', ('No', 'Yes'))
+
+# Correlation method
 st.sidebar.subheader('Correlation method:')
 st.sidebar.write('Would you like to compute a network by thresholding correlations?')
 if_corr = st.sidebar.selectbox('Yes or no', ('Yes', 'No'))
@@ -57,24 +61,18 @@ st.sidebar.markdown('''
 Created by Coco Huang and Lulu Wang.
 ''')
 
-# Row A
+# Title row
 st.markdown('## Discover the hidden network and relationships among stocks')
 
-# Row B
+# Data board row
 st.markdown('### Data')
 col1, col2, col3 = st.columns(3)
 col1.metric("Number of stocks", n_stocks, '')
 col2.metric("Start", start, '')
 col3.metric("End", end, '')
-
-# Row C
 X, embedding, names = Util.get_data(n_stocks,start_dt,end_dt,symbols=symbols)
-fig = px.line(X).update_layout(
-    yaxis_title="Daily variation"
-)
-st.plotly_chart(fig, use_container_width=True)
 
-# Row D
+# Glasso row
 binary_adj = Util.glasso_adj(X)
 n_edges = binary_adj.sum()
 st.markdown('### [Glasso algorithm](%s) discovered latent stock network: %d connections' %('https://jerryfriedman.su.domains/ftp/glasso-bio.pdf',n_edges))
@@ -83,7 +81,7 @@ fig = Util.plot_network(G,embedding,names,'')
 # Row C
 st.plotly_chart(fig, use_container_width=True)
 
-# Row E
+# Correlation row
 if if_corr == 'Yes':
     binary_adj = Util.cov_adj(X,threshold)
     n_edges = binary_adj.sum()
@@ -91,4 +89,11 @@ if if_corr == 'Yes':
     G = Util.create_G(binary_adj)
     fig = Util.plot_network(G,embedding,names,'')
     # Row E
+    st.plotly_chart(fig, use_container_width=True)
+
+# Time series row
+if if_ts:
+    fig = px.line(X).update_layout(
+        yaxis_title="Daily variation"
+    )
     st.plotly_chart(fig, use_container_width=True)

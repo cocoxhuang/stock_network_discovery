@@ -43,7 +43,7 @@ else:
 
 st.sidebar.write(f'The number of stocks is {n_stocks}. At most {n_days} for computation accurary.')
 
-# Correlation method
+# Time series plot
 st.sidebar.subheader('Time series:')
 st.sidebar.write('Would you like to plot the time series of daily variations (close - open) of these stocks? ')
 if_ts = st.sidebar.selectbox('Yes or no', ('No', 'Yes'))
@@ -92,7 +92,7 @@ if if_corr == 'Yes':
     st.plotly_chart(fig, use_container_width=True)
 
 # Time series row
-if if_ts:
+if if_ts == 'Yes':
     fig = px.line(X).update_layout(
         yaxis_title="Daily variation"
     )

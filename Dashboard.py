@@ -32,12 +32,12 @@ if_select = st.sidebar.selectbox('Method', ('Top weighted stocks', 'Pick my own 
 
 if if_select == 'Top weighted stocks':
     # if pick top weighted stocks
-    n_stocks = st.sidebar.number_input('Select number of top weighted stocks in S&P 500:', min_value=0, max_value=n_days, value=20, step=1)
+    n_stocks = st.sidebar.number_input('Select number of top-weighted stocks in S&P 500:', min_value=0, max_value=n_days, value=20, step=1)
     n_stocks = int(n_stocks)
     symbols = None
 else:
     # if pick your own stocks
-    symbols = st.sidebar.text_input('The symbols of stocks of your choice seperated by comma (e.g. MSFT, AAPL): ', 'MSFT, AAPL, AMZN, NVDA, GOOGL, META, GOOG, TSLAUNH')
+    symbols = st.sidebar.text_input('The symbols of stocks of your choice separated by comma (e.g. MSFT, AAPL): ', 'MSFT, AAPL, AMZN, NVDA, GOOGL, META, GOOG, TSLAUNH')
     symbols = symbols.split(", ")
     n_stocks = len(symbols)
 
@@ -46,9 +46,9 @@ st.sidebar.write(f'The number of stocks is {n_stocks}. At most {n_days} for comp
 # Time series plot
 st.sidebar.subheader('Time series:')
 st.sidebar.write('Would you like to plot the time series of daily variations (close - open) of these stocks? ')
-if_ts = st.sidebar.selectbox('Yes or no', ('No', 'Yes'))
+if_ts = st.sidebar.selectbox('Yes or no', ('Yes', 'No'))
 if if_ts == 'Yes':
-    ts_sym = st.sidebar.text_input('Choose the symbols of the stocks you would like to plot seperated by comma (e.g. MSFT, AAPL): ', 'MSFT, AAPL')
+    ts_sym = st.sidebar.text_input('Choose the symbols of the stocks you would like to plot separated by comma (e.g. MSFT, AAPL): ', 'MSFT, AAPL')
     ts_sym = ts_sym.split(", ")
 
 # Correlation method

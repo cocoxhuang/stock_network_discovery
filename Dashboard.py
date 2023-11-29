@@ -20,7 +20,7 @@ st.sidebar.subheader('Ending date:')
 end = st.sidebar.text_input('Ending date (MM-DD-YYYY)', '01-01-2023')
 st.sidebar.write('The current ending date is', end)
 
-# max number of stocks due to computational accuracy of Glasso algo
+# max number of stocks due to computational accurary of Glasso algo
 start_dt = datetime.strptime(start, '%m-%d-%Y').date()
 end_dt = datetime.strptime(end, '%m-%d-%Y').date()
 n_days = int( (end_dt-start_dt).days * 0.69)
@@ -32,7 +32,7 @@ if_select = st.sidebar.selectbox('Method', ('Top weighted stocks', 'Pick my own 
 
 if if_select == 'Top weighted stocks':
     # if pick top weighted stocks
-    n_stocks = st.sidebar.number_input('Select number of top-weighted stocks in S&P 500:', min_value=0, max_value=n_days, value=20, step=1)
+    n_stocks = st.sidebar.number_input('Select number of top weighted stocks in S&P 500:', min_value=0, max_value=n_days, value=20, step=1)
     n_stocks = int(n_stocks)
     symbols = None
 else:

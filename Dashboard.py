@@ -47,7 +47,7 @@ st.sidebar.write(f'The number of stocks is {n_stocks}. At most {n_days} for comp
 st.sidebar.subheader('Time series:')
 st.sidebar.write('Would you like to plot the time series of daily variations (close - open) of these stocks? ')
 if_ts = st.sidebar.selectbox('Yes or no', ('No', 'Yes'))
-if if_ts:
+if if_ts == 'Yes':
     ts_sym = st.sidebar.text_input('Choose the symbols of the stocks you would like to plot seperated by comma (e.g. MSFT, AAPL): ', 'MSFT, AAPL')
     ts_sym = ts_sym.split(", ")
 

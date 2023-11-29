@@ -20,7 +20,7 @@ st.sidebar.subheader('Ending date:')
 end = st.sidebar.text_input('Ending date (MM-DD-YYYY)', '01-01-2023')
 st.sidebar.write('The current ending date is', end)
 
-# max number of stocks due to computational accurary of Glasso algo
+# max number of stocks due to computational accuracy of Glasso algo
 start_dt = datetime.strptime(start, '%m-%d-%Y').date()
 end_dt = datetime.strptime(end, '%m-%d-%Y').date()
 n_days = int( (end_dt-start_dt).days * 0.69)

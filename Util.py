@@ -8,6 +8,7 @@ import pandas as pd
 import requests
 import yfinance as yf
 from sklearn.decomposition  import PCA
+import networkx as nx
 
 def get_data(top,start,end,symbols = None):
 
@@ -87,12 +88,11 @@ def create_G(binary_adj):
     edge_index = torch.tensor(binary_adj).to_sparse().indices()
     edges = list(zip(edge_index[0].tolist(),edge_index[1].tolist()))
 
-    import networkx as nx
     G = nx.Graph()
     pos = nx.get_node_attributes(G, "pos")
-    G.add_edges_from(edges)
     G.add_nodes_from(np.arange(len(binary_adj)))
-
+    G.add_edges_from(edges)
+    
     return G
 
 def plot_network(G,embedding,names,title):

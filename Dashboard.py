@@ -55,7 +55,7 @@ if if_ts == 'Yes':
 st.sidebar.subheader('Correlation method:')
 st.sidebar.write('Would you like to compute a network by thresholding correlations?')
 if_corr = st.sidebar.selectbox('Yes or no', ('Yes', 'No'))
-threshold = st.sidebar.number_input('If so, what is the threshold: ', 0.5)
+threshold = st.sidebar.number_input('If so, what is the threshold: ', min_value=0, max_value=1, value=0.5)
 st.sidebar.write(f'There will be a connection between two stocks if their correlation is bigger than {threshold}')
 
 # Comments and creators

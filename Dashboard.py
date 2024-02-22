@@ -12,12 +12,12 @@ st.sidebar.header('Stock Network Discovery Dashboard `Demo`')
 
 # starting date
 st.sidebar.subheader('Starting date:')
-start = st.sidebar.text_input('Starting date (MM-DD-YYYY)', '01-01-2018')
+start = st.sidebar.text_input('Starting date (MM-DD-YYYY)', '01-01-2022')
 st.sidebar.write('The current starting date is', start)
 
 # ending date
 st.sidebar.subheader('Ending date:')
-end = st.sidebar.text_input('Ending date (MM-DD-YYYY)', '01-01-2023')
+end = st.sidebar.text_input('Ending date (MM-DD-YYYY)', '01-01-2024')
 st.sidebar.write('The current ending date is', end)
 
 # max number of stocks due to computational accurary of Glasso algo
